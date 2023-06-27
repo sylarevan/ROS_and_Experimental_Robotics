@@ -13,10 +13,18 @@ The unit is split in 3 different parts:
 
 ## Evaluation
 The evaluation is made of:
-- two MCQs (on Moodle); *the raw files listig all the questions (and answers!) are available upon request;*
+- two MCQs (on Moodle); *the raw files listing all the questions (and answers!) are available upon request;*
 - one practical exam: it is different each year; the students have to code in a limited time a ROS node with specific specifications; *the LateX subject and the code used for the two evaluations in the last two years are available in the [Evaluation/Exam](Evaluation/Exam) folder.*
 - the project, which is evaluated on the simulated and experimental parts, with a special care to the code written during these sessions.
 
-======
+---
 
-This teaching unit mainly relies on a pre-installed virtual machine provided by the teachers at the very beggining of the semester. A short [how-to](Practicals/Installation/installation.pdf) is provided to explain how to use this VM, based on a standard Ubuntu 20.04 and Ros Kinetic installation. Fur students working with macOS, an alternative installation method based on [RoboStack](https://robostack.github.io/) is proposed [in the repository](Practicals/macOS/Robostack_on_macOS.pdf)
+This teaching unit mainly relies on a pre-installed virtual machine provided by the teachers at the very beggining of the semester. A short [how-to](Practicals/Installation/installation.pdf) is provided to explain how to use this VM, based on standard Ubuntu 20.04 and Ros Kinetic installations. Fur students working with macOS, an alternative installation method based on [RoboStack](https://robostack.github.io/) is proposed [in the repository](Practicals/macOS/Robostack_on_macOS.pdf)
+
+The students have access to about 30 [turtlebot 3 burger](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/). Each robot emits a wifi hotspot nammed ***turtlebotX_wifi***, with $X$ the number of the robot sticked on the higher plate. The way to interact with the robot through ROS (wifi connection, network parameterization of the VM, etc.) is indicated in the [turtlebot_guide](Practicals/Turtlebot_guide/turtlebot_guide.pdf) document.
+
+
+To contact us: (add sorbonne-universite to our email to reach us!)
+Sylvain Argentieri <sylvain.argentieri@>
+Fabien Vérité <fabien.verite@>
+Ludociv Saint Bauzel <ludovic.saint-bauzel@>
