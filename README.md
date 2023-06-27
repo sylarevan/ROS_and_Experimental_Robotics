@@ -21,8 +21,9 @@ The evaluation is made of:
 
 This teaching unit mainly relies on a pre-installed virtual machine provided by the teachers at the very beggining of the semester. A short [how-to](Practicals/Installation/installation.pdf) is provided to explain how to use this VM, based on standard Ubuntu 20.04 and Ros Kinetic installations. Fur students working with macOS, an alternative installation method based on [RoboStack](https://robostack.github.io/) is proposed [in the repository](Practicals/macOS/Robostack_on_macOS.pdf)
 
-The students have access to about 30 [turtlebot 3 burger](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/). Each robot emits a wifi hotspot nammed ***turtlebotX_wifi***, with $X$ the number of the robot sticked on the higher plate. The way to interact with the robot through ROS (wifi connection, network parameterization of the VM, etc.) is indicated in the [turtlebot_guide](Practicals/Turtlebot_guide/turtlebot_guide.pdf) document.
+The students have access to about 30 [turtlebot 3 burger](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/). Each robot emits a wifi hotspot with a SSID ***turtlebotX_wifi***, with $X$ the number of the robot sticked on the higher plate. The way to interact with the robot through ROS (wifi connection, network parameterization of the VM, etc.) is indicated in the [turtlebot_guide](Practicals/Turtlebot_guide/turtlebot_guide.pdf) document.
 
+---
 
 To contact us: (add sorbonne-universite to our email to reach us!)
 - Sylvain Argentieri <sylvain.argentieri@>
