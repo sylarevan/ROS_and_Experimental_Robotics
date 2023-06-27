@@ -1,0 +1,9 @@
+# Mydrone altitude warning management
+# 
+#  - message: should be either NORMAL or WARNING
+#  - response: a short message indicating the color of the WARNING LED on the controler
+#       color is changed to GREEN if altitude is NORMAL, or to RED if a WARNING is raised with the service
+
+string message
+---
+string response

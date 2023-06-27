@@ -1,0 +1,12 @@
+# Mybot ultrasound sensors management message
+# 
+#  - message: should be either ACTIVATE, DEACTIVATE or STATUS
+#  - sensor_id: ID of the US sensor to activate or deactivate. 
+#  - response: a short message confirming the action of the service
+#  - deactivated_id: a list of US sensor IDS that have been deactivated
+
+string message
+int8 sensor_id
+---
+string response
+int8[] deactivated_id

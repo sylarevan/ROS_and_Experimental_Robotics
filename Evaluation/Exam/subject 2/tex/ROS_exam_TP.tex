@@ -1,0 +1,367 @@
+\documentclass[10pt,a4paper,english]{exam}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+% Quelques paquets ...
+%\usepackage{color} 
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tcolorbox}
+\usepackage{framed}
+\usepackage[framemethod=tikz]{mdframed}
+
+% Mise en page
+\usepackage{geometry}
+\geometry{hmargin=2.5cm,vmargin=2cm}
+
+% Quelques commandes
+\newcounter{mainmemorder}
+\newcommand{\save}{\setcounter{mainmemorder}{\value{enumi}}}
+\newcommand{\load}{\setcounter{enumi}{\value{mainmemorder}}}
+\newcommand{\mytext}[1]{\colorbox{lightgray}{\texttt{#1}}}
+
+% Examen
+\printanswers \shadedsolutions
+%\noprintanswers
+\newcommand{\bareme}[1]{\textbf{\newline\color{red}#1pts} -}
+
+\global\mdfdefinestyle{graybox}{%
+  linecolor=black,linewidth=1pt,%
+ % leftmargin=1cm,rightmargin=1cm,%
+  backgroundcolor=lightgray
+}
+
+\mdfdefinestyle{evaluation}{
+    frametitlebackgroundcolor=black!15,
+    frametitlerule=true,
+    roundcorner=10pt,
+    middlelinewidth=1pt,
+    innermargin=0.5cm,
+    outermargin=0.5cm,
+    innerleftmargin=0.5cm,
+    innerrightmargin=0.5cm,
+    innertopmargin=\topskip,
+    innerbottommargin=\topskip,
+    frametitle={Evaluation}
+}
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+
+% C'est parti .......
+\begin{document}
+
+% Titre
+{\large
+%\noindent NOM/Prénom :  \hspace{6cm} Num. étudiant :\\
+\begin{center}
+	{
+		\textbf{Sorbonne Université -- Département de Sciences De l'Ingénieur\\}
+		\textbf{ROS and experimental robotics}}\\
+	\emph{February 2023, 1h30. \\
+		%\vspace{0.4cm}
+	}
+\end{center}}
+
+You are working in a Robotics company currently developing a new low-cost drone called \texttt{mydrone},
+endowed with 4 propellers, one camera, one temperature sensor, and one pressure sensor. The drone is
+controlled from a remote which is only equipped with joysticks and leds indicating the current
+status of different elements on the drone, like the battery charging level, or warnings about e.g.\
+too far distance between the drone and the pilot.
+
+You are in charge of the altitude estimation of the drone, which must be computed from the
+data measured onboard during  the flight. Luckily, the altitude relates directly to the air pressure
+and current temperature through the relation
+%
+\begin{equation}
+	P = P_0\ e^{-\frac{\mu g h}{R T}},
+	\label{eq:altitude}
+\end{equation}
+%
+where $P_0 = 101325$ Pa is the standard pressure at sea level, $\mu = 0.0289644$ kg/mol is the mean
+molecular mass of air, $g=9.80665$ m/s$^2$ is the gravity, $R = 8.31432$ J/K.mol is the perfect gas
+constant, $P$ the pressure in Pa, T the temperature\footnote{Remember that $T[K] = 273.15 +
+		T[^{\circ}C]$} in K, and $h$ the altitude in m.
+
+Your colleagues have already developed a ROS node \mytext{mydrone} running on the drone, and
+communicating directly with the hardware on the system, and publishing the sensors values on
+dedicated topics. For now, the engineers are able to publish (i) the temperature measured by the
+corresponding sensor in the \mytext{/temperature} topic (in $^\circ C$), and the air pressure around
+the drone in the \mytext{/pressure} topic (in Pa). \\
+
+In addition, the ROS node \mytext{mydrone} is also in charge of triggering some LEDs on the remote
+controller used by the pilot. Your colleagues have so far only implemented the triggering of the
+\texttt{ALT WARN} indicator, which is illuminated in green if the drone flights below 1300m of
+altitude, or red if ot flights above. This altitude threshold has been determined thanks to the
+range of the remote controller: if the drone is too high, the drone might not be able to respond to
+the pilot controls anymore. The change in color of the LED is performed by calling the service
+\mytext{/altitude\_warning}, which uses as an input the text string "NORMAL" if the drone altitude
+is below 1300m, or "WARNING" if it is above.\\
+
+\textbf{Your objective is to write a ROS node called \mytext{exam}, which must publish an estimation
+	of the drone altitude on a new \mytext{/altitude} topic (in m), and trigger if needed the
+	\texttt{ALT WARN} indicator on the remote by calling the appropriate service.\\}
+
+\begin{mdframed}[style=evaluation]
+	At the end of the exam, you have to upload two files to Moodle:
+	\begin{itemize}
+		\item A PDF report, written with \texttt{openoffice} for example (in french or english), where
+		      you answer to the questions below and where you can copy and past the outputs of the
+		      different commands you use to answer the questions. For example, for the question ``6.
+		      List all the running topics'', you must put in your report :
+		      \begin{itemize}
+			      \item the exact command line you use to answer the question,
+			      \item and the corresponding output you get.
+		      \end{itemize}
+		      Obviously, you have to comment all your responses. A simple copy and past without a
+		      sentence explaining the outputs is \textbf{not} considered as a full response to the
+		      questions.
+		\item A \texttt{zip} file of your \texttt{exam} package that will be used to access your
+		      code, but also to actually launch it.
+	\end{itemize}
+\end{mdframed}
+
+\section*{Preparation}
+\begin{enumerate}
+	\item To begin with, download the file \texttt{mydrone.zip} from Moodle. Extract it in the
+	      \texttt{src} folder of your catkin workspace. Launch \mytext{catkin\_make} to build your
+	      ROS workspace and source you \texttt{.bashrc}.
+	\item Go to the \texttt{src} folder of the package \mytext{mybot} you just downloaded, and make
+	      executable all the python scripts in there with the shell command \texttt{chown +x
+		      python\_file.py}.
+	\item Quickly test that all is OK by running the node \mytext{mydrone\_node}. Contact your
+	      teacher if it is not the case.
+	      \save
+\end{enumerate}
+
+
+%===================================================================================================
+\section{Exploration of ROS and of the nodes}
+
+\begin{enumerate}
+	\load
+	\item Run the node \mytext{mydrone\_node} from the package \mytext{mydrone}. Then list all the running nodes.
+	      \begin{solution} \textbf{\textcolor{red}{1 point. La moitié si pas de commentaire.}}
+		      \begin{verbatim}
+> rosnode list
+/mydrone
+/rosout	      			
+		\end{verbatim}
+		      2 nœuds tournent : le nœud attendu et \mytext{rosout}, lancé avec le master via la
+		      commande \texttt{roscore}.
+	      \end{solution}
+	\item List the information about the \mytext{mydrone\_node} node. Explain each line of the output
+	      you get.
+
+	      \begin{solution}\textbf{\textcolor{red}{2 points. 1pt si des lignes ne sont pas expliquées.}}
+		      \begin{verbatim}
+> rosnode info /mybot_usarray
+--------------------------------------------------------------------------------
+Node [/mydrone]
+Publications:
+ * /pressure [std_msgs/Float32]
+ * /rosout [rosgraph_msgs/Log]
+ * /temperature [std_msgs/Float32]
+
+Subscriptions: None
+
+Services:
+ * /altitude_warning
+ * /mydrone/get_loggers
+ * /mydrone/set_logger_level
+
+contacting node http://127.0.0.1:62496/ ...
+Pid: 13996
+Connections:
+ * topic: /rosout
+    * to: /rosout
+    * direction: outbound (62498 - 127.0.0.1:62501) [11]
+    * transport: TCPROS\end{verbatim}
+		      Je ne vais pas tout lister (mais les étudiants doivent le faire !). La dernière partie
+		      n'est souvent pas comprise :
+		      \begin{itemize}
+			      \item \verb+contacting node http://127.0.0.1:56353/ ...+: adresse et port où
+			            tourne le nœud
+			      \item \verb+Pid: 12097+: Process Identification du numéro du processus
+			      \item  \verb+* direction: outbound (56355 - 127.0.0.1:56358) [10]+: type de
+			            connexion, et vers quelle addresse/port (ici, celui du master)
+			      \item \verb+* transport: TCPROS+: protocole utilisé par ROS, ici une connection
+			            TCPROS.
+		      \end{itemize}
+	      \end{solution}
+	\item List all the available topics. Explain the role of the \mytext{/rosout} topic.
+	      \begin{solution}\textbf{\textcolor{red}{1 point. Aucun si /rosout n'est pas expliqué (ou explication fausse).}}
+		      \begin{verbatim}
+> rostopic list
+/pressure
+/rosout
+/rosout_agg
+/temperature
+			   \end{verbatim}
+		      \texttt{/rosout} is le topic sur lequel les nœuds peuvent publier des messages de log de manière
+		      centralisée.
+	      \end{solution}
+
+	\item What kind of message is available on the \mytext{/temperature} topic?
+	      \begin{solution}\textbf{\textcolor{red}{1 point. La moitié si pas de commentaire.}}
+		      \begin{verbatim}
+> rosmsg info std_msgs/Float32
+float32 data
+		\end{verbatim}
+		      Valeur \texttt{data} qui stocke la valeur du message en float.
+	      \end{solution}
+	\item Display a few messages available on the topic \mytext{/temperature}. At which rate are they
+	      published?
+	      \begin{solution}\textbf{\textcolor{red}{1 point. 0.5 si commande bonne mais rate faux.}}
+		      \begin{verbatim}
+> rostopic echo /temperature
+data: 2.8841073513031006
+---
+data: 2.48634672164917
+---
+data: 2.0330379009246826
+---
+> rostopic hz /temperature
+subscribed to [/temperature]
+average rate: 0.777
+	min: 1.286s max: 1.286s std dev: 0.00000s window: 2
+average rate: 0.777
+	min: 1.286s max: 1.288s std dev: 0.00066s window: 3\end{verbatim}
+		      Publication à 0.77Hz environ.
+	      \end{solution}
+	      \save
+\end{enumerate}
+
+%===================================================================================================
+\section{The exam node}
+
+You have to write a new ROS node \mytext{exam} which must compute and publish the altitude of the
+drone.
+
+\begin{enumerate}
+	\load
+	\item Create a package \mytext{exam} in your \texttt{catkin} workspace, with dependencies to \texttt{rospy}, \texttt{std\_msgs} and
+	      \texttt{mydrone} ;
+	      \begin{solution}
+		      \textbf{\textcolor{red}{1 point. 0 si rien  n'est expliqué.}}\\
+		      \texttt{catkin\_create\_pkg exam rospy std\_msgs mydrone}
+	      \end{solution}
+	\item Create the node \mytext{exam\_node} inside the package \mytext{exam} which must subscribe
+	      to the two topics \mytext{/temperature} and \mytext{/pressure}. To begin with, you might only
+	      display the temperature and pressure values received on these topics.
+	      \begin{solution}
+		      \textbf{\textcolor{red}{2 points. 1 point si seulement un topic.}}
+		      Voir la proposition de solution \texttt{exam\_node.py}. Ici, il faut en fait que les
+		      étudiants aient défini 2 subscriber, et les 2 callback qui vont avec, qui peuvent à ce
+		      stade ne faire qu'un print du message reçu.
+	      \end{solution}
+	      \save
+\end{enumerate}
+
+\begin{mdframed}[style=evaluation]
+	It is important you comment \textbf{extensively} your code, even for elementary lines of code.
+	Your node will be assessed by running it (it must obviously run as expected and provide the
+	functionalities listed above), but the quality of the code and its comments will also be taken
+	into account.
+\end{mdframed}
+
+\begin{enumerate}
+	\load
+	\item On the basis on the temperature and pressure values obtained before, compute the
+	      altitude in m thanks to Equation~\eqref{eq:altitude}. The result must then be published on a new
+	      topic \mytext{/altitude} \textbf{with a rate of 10 Hz}.
+	      \save
+	      \begin{solution}\textbf{\textcolor{red}{4 points, on vérifie surtout l'agorithmie et la logique du code. 1.5 points si le publisher est correctement déclaré.}}
+		      Du coup, ici il faut que les étudiants définissent un Publisher, avec une boucle de
+		      publication qui doit tourner à 10Hz à l'aide de \texttt{rospy.Rate} et
+		      \texttt{rospy.sleep}. La difficulté/piège ici est que les 2 topics de température et
+		      pression ne publient pas à la même vitesse : il faut donc que les étudiants trouvent un
+		      moyen pour stocker la solution dans une variable utilisée pour calculer l'altitude avant
+		      la publication sur le topic. Dans le code \texttt{exam\_node.py} j'utilise 2 variables
+		      globales pour faire ça, et ce sont ces variables qui sont utilisées dans la boucle de
+		      publication. D'autres solutions doivent être possibles, en particulier en utilisant un
+		      objet.
+	      \end{solution}
+\end{enumerate}
+The following questions are mostly independant.
+\begin{enumerate}
+	\load
+	\item Write a launchfile in the \mytext{exam} package launching both
+	      \mytext{mydrone\_node} and \mytext{exam\_node} nodes.
+	      \begin{solution}\textbf{\textcolor{red}{1 point. La moitié si pas de commentaires.}}
+		      Rien de spécial ici :
+		      \begin{verbatim}
+<launch>
+
+<!-- Run one mydrone nodes -->
+<node pkg="mydrone" name="mydrone" type="mydrone_node.py"/>
+
+<!-- Run one exam node -->
+<node pkg="exam" name="exam" type="exam_node.py" output="screen" required="true">
+
+</node>
+
+</launch>			
+		\end{verbatim}
+	      \end{solution}
+	\item On the basis on the altitude computed before, trigger the call to the
+	      \mytext{/altitude\_warning} service to change the color of the \texttt{ALT WARN} indicator
+	      to red or green.
+	      \begin{solution}
+		      \textbf{\textcolor{red}{4 points. 2 points si appel au service en boucle.}}
+		      Rien de spécial ici, il faut appeler le service uniquement si on passe dessus ou dessous
+		      l'altitude seuil. ATTENTION : il faut appeler le service SEULEMENT à la frontière, et ne
+		      pas appeler non-stop le service !
+	      \end{solution}
+	\item The company plans to propose multiple model of the remote controller in the future, so
+	      that the current altitude limit of 1300m could be extended.
+
+	      \begin{enumerate}
+		      \item To propose a more generic way to deal with these various models of remote, add a
+		            \texttt{threshold} parameter in the launchfile, and use it in your code to make the
+		            \texttt{ALT WARN} indicator turn red depending on this parameter value.
+		            \begin{solution}\textbf{\textcolor{red}{1 points. 0 si la variable n'est pas initialisée.}}
+			            Rien de spécial, il faut ajouter dans le launchfile :
+			            \begin{verbatim}
+<!-- Parameters -->
+<param name="threshold" value="1300" />								  
+						\end{verbatim}
+			            Et ajouter le \texttt{getparam} dans le code. Attention, la variable doit
+			            être initialisée !
+		            \end{solution}
+		      \item In practice, one would the altitude warning to be triggered only if the drone stays above
+		            the \texttt{threshold} \textbf{more than 5s}. Modify your code to implement such a delay. The
+		            \texttt{ALT WARN} indicator must still go back to green as soon as the drone flights above the
+		            \texttt{threshold}.
+		            \begin{solution}\textbf{\textcolor{red}{3 points.}}
+			            Euh ... j'ai eu la flemme de coder ça, mais il suffit de mettre un compteur
+			            dans la boucle de publication qui compte combien de fois on a été au dessus
+			            de l'altitude seuil. Connaissant la vitesse de la boucle (10ms), il faut
+			            donc avoir été 500 fois au dessus pour appeler le service. Bien sûr, le
+			            compteur doit être réinitialisé dès qu'on repasse sous le seuil.
+		            \end{solution}
+	      \end{enumerate}
+
+
+\end{enumerate}
+
+\begin{solution}
+	Il reste à évaluer la qualité du code :
+	\begin{itemize}
+		\item est-ce que le neud se lance et fait ce qu'il doit faire, selon l'avancée de l'étudiant ? \textbf{\textcolor{red}{2 point}}
+		\item est-ce que le code a été commenté partout et les commentaires sont clairs ?
+		      \textbf{\textcolor{red}{4 points. La moitié si assez peu de commentaires et même 0 s'il n'y
+				      en a clairement pas assez.}}
+		\item qualité du code : algorithmiquement, est-ce "bien" codé, en respectant les bonnes pratiques ? \textbf{\textcolor{red}{2 points.}}
+	\end{itemize}
+
+\end{solution}
+
+\end{document}
