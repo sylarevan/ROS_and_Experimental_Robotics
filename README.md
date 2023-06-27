@@ -25,6 +25,6 @@ The students have access to about 30 [turtlebot 3 burger](https://emanual.roboti
 
 
 To contact us: (add sorbonne-universite to our email to reach us!)
-Sylvain Argentieri <sylvain.argentieri@>
-Fabien Vérité <fabien.verite@>
-Ludociv Saint Bauzel <ludovic.saint-bauzel@>
+- Sylvain Argentieri <sylvain.argentieri@>
+- Fabien Vérité <fabien.verite@>
+- Ludovic Saint Bauzel <ludovic.saint-bauzel@>
