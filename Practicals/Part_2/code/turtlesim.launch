@@ -1,0 +1,8 @@
+<launch>
+
+  <!-- Run the mybot_teleop node -->
+  <node pkg="mybot_teleop" name="mybot_teleop" type="mybot_teleop.py" 
+        output="screen" required="true">
+  </node>
+
+</launch>

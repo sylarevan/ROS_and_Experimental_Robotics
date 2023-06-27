@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<launch>
+ 
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model)_for_autorace_2020.urdf.xacro" />
+
+  <!-- Launch Rviz -->
+  <node name="rviz" pkg="rviz" type="rviz"/>
+ 
+</launch>

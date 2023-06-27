@@ -1,0 +1,131 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\begin{document}
+
+\title{My ROS project}
+
+\author{
+    \IEEEauthorblockN{Nicolas \textsc{Dupont}}
+    \IEEEauthorblockA{Master ISI/SAR/SMR\\
+        \textit{Student number 12345678}
+    }
+    \and
+    \IEEEauthorblockN{Robert \textsc{Dupond}}
+    \IEEEauthorblockA{Master ISI/SAR/SMR\\
+        \textit{Student number 12345678}
+    }
+}
+
+\maketitle
+
+\begin{abstract}
+    This is my wonderful \LaTeX~report on my ROS project. In this document, we will \ldots
+\end{abstract}
+
+\section{Introduction}
+This doubled-sided, 2 columns document must not exceed 3 pages, and should be written in English. It
+should be constituted of a limited number of figures and tables, and be oriented towards the
+analysis of your architecture and of its performance. It is \emph{not} a purely technical report, we
+expect you to explain in this document your choices, to analyze their consequences, mainly in terms
+of performance w.r.t.\ the task to be solved.
+
+The plan of the document (section/subsection organization) must not be changed. Neverthlesse, you
+can eventually add some subsections if really required.
+
+\section{Presentation of the ROS architecture}
+In this section, you shall present the ROS architecture you build to solve the objectives you
+mentioned in the introduction. This presentation must be technical and go in depth when needed, so
+as to demonstrate you ability to master ROS concepts and to use them in an actual project.
+
+\subsection{A short overview}
+% -> présentation de l'architecture
+% => incluant forcément un schéma complet, détaillé, légendé de la topologie du système
+In this subsection, you can first briefly introduce your architecture: used nodes, topics, messages,
+services, etc. Then, you shall precisely describe some elements, and include and comment a mandatory
+figure/sketch like in Figure~\ref{fig:architecture} representing the architecture topolgy, i.e.\
+your nodes, how they communicate with each other, etc.
+%
+\begin{figure}[htbp]
+    \centerline{\includegraphics{fig1.png}}
+    \caption{My very simple architecture.}
+    \label{fig:architecture}
+\end{figure}
+%
+
+\subsection{Algorithmic structure of the architecture}
+% => incluant forcément des précisions sur l'agorithmie pour un scénario donné (tel nœud détecte un
+%    obstacle, envoie un message, qui stoppe le robot, qui passe en attente, qui ...), exemple =
+%    machine à état (si pas de lignes, alors ..., ou si lignes ET mur, alors ...)
+In this subsection, you must detail how all the nodes listed in your architecture work together
+for a given scenario. For instance:
+\begin{itemize}
+    \item node A detects an obstacle on the basis on node B which compute the mean distance to a
+          laser impact in front of the robot from the LDS sensor ;
+    \item then, node C decides to stop the robot movement, and sends a request to the service
+          exposed by node D ;
+    \item so, node D decides wether the robot should (choice 1) stay at rest or (choice 2) move away
+          from the obstacle:
+          \begin{itemize}
+              \item if choice 1: node D sends \ldots
+              \item if choice 2: node D requests \ldots
+          \end{itemize}
+    \item etc.
+\end{itemize}
+%
+Such an algorithm, here described in the form of if/else/then statments, can also be described
+through a state machine that you should carefully and precisely formalize. You can obviously use an
+additional figure to support your discussions, if needed.
+
+\section{Performance characterization}
+% -> caractérisation des performances (avec définition et calcul des indicateurs, incluant si
+%    nécessaire des figures supplémentaires, en nombre très restreint)
+In this section, you must analyzed the performance of your architecture. Such an analysis requires
+first the formal definition of indicators/cues (e.g. mean errors, response time, etc., like the
+fictitious $H^{\infty}$ definition in Equation~\eqref{eq:def_h_infty}) of your choice, which must be correctly chosen so as to
+assess the performance you are trying to evaluate (e.g.\ precision of the line following algorithm,
+stability of the servoing w.r.t.\ very curved lines, etc.).
+%
+\begin{equation}
+    H^{\infty} = \alpha + \Gamma.
+    \label{eq:def_h_infty}
+\end{equation}
+%
+Once chosen and defined, you have then to plot --in a specific figure or on a table
+like in Table~\ref{tab:performance_table}-- the values of your indicator and comment its evolution
+and signification regarding the performance you are trying to reach.
+%
+\begin{table}[htbp]
+    \caption{My super performance indicator}
+    \begin{center}
+        \begin{tabular}{|c|c|c|c|}
+            \hline
+            \textbf{Table} & \multicolumn{3}{|c|}{\textbf{Table Column Head}}                                                         \\
+            \cline{2-4}
+            \textbf{Head}  & \textbf{\textit{Table column subhead}}           & \textbf{\textit{Subhead}} & \textbf{\textit{Subhead}} \\
+            \hline
+            $H^{\infty}$   & 42\%$^{\mathrm{a}}$                              & 67\%                      & 89\%                      \\
+            \hline
+            \multicolumn{4}{l}{$^{\mathrm{a}}$Only when it works.}
+        \end{tabular}
+        \label{tab:performance_table}
+    \end{center}
+\end{table}
+
+
+Feel free here to add subsection if it helps in understanding the different steps in your
+evaluation of your architecture performance.
+
+\section{Conclusion and perspectives}
+% -> limites et perspectives (qu'est ce qui peut être amélioré, comment, pourquoi, etc.)
+You can use this last section to conclude on your work and explain what you could have improved if
+you had more time, how and why.
+
+\end{document}

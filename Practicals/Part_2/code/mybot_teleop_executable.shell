@@ -1,0 +1,2 @@
+$ cd ~/catkin_ws/src/mybot_teleop/scripts
+$ chmod +x mybot_teleop.py
