@@ -7,7 +7,7 @@ This unit is proposed in the ["Automatique, Robotique" Master]([https://www.goog
 ## Practicals
 This folder contains the source files of the LateX-generated PDF file used during the practicals sessions. *An enriched version, listing all the answers of each question is also available upon request.*
 The unit is split in 3 different parts:
-- **[Part 1](Practicals/Part 1), an introduction to ROS**: this is where all the students actually discover ROS and its root concept. Students must carefully follow online tutorials, helped with a guide and a forum available on the Sorbonne Université Moodle unit page;
+- **[Part 1](Practicals/Part_1), an introduction to ROS**: this is where all the students actually discover ROS and its root concept. Students must carefully follow online tutorials, helped with a guide and a forum available on the Sorbonne Université Moodle unit page;
 - **Part 2, URDF and simulations with ROS**: this is where the students start to work with [gazebo](https://gazebosim.org/), a physical simuator used to gather realistic sensorimotor data from simulations;
 - **Part 3, project**: the students now work on their own, on simulation *and* with a real [turtlebot 3 burger](https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/) system. They all have different challenges to reach, like navigating by following color lines, avoiding obstacles, navigating in a corridor, etc.
 
@@ -19,4 +19,4 @@ The evaluation is made of:
 
 ======
 
-This teaching unit mainly relies on a pre-installed virtual machine provided by the teachers at the very beggining of the semester. A short [how-to](Practicals/Installation/indtallation.pdf) is provided to explain how to use this VM, based on a standard Ubuntu 20.04 and Ros Kinetic installation. Fur students working with macOS, an alternative installation method based on [RoboStack](https://robostack.github.io/) is proposed [in the repository](Practicals/macOS/Robostack_on_macOS.pdf)
+This teaching unit mainly relies on a pre-installed virtual machine provided by the teachers at the very beggining of the semester. A short [how-to](Practicals/Installation/installation.pdf) is provided to explain how to use this VM, based on a standard Ubuntu 20.04 and Ros Kinetic installation. Fur students working with macOS, an alternative installation method based on [RoboStack](https://robostack.github.io/) is proposed [in the repository](Practicals/macOS/Robostack_on_macOS.pdf)
