@@ -1,3 +1,2 @@
-.vscode
-.tmp_latex
 .DS_Store
+*/*/.tmp_latex
