@@ -1,0 +1,2 @@
+# add this line to your Bashrc
+export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/projet/worlds/model
