@@ -5,7 +5,30 @@ This unit is proposed in the ["Automatique, Robotique" Master]([https://www.goog
 
 
 ## Pedagogical approach
-The ABCD (Activity Based Curriculum Design) method.
+The unit is mainly rooted on the ABCD (Activity Based Curriculum Design) method. Basically, this approach relies on:
+- A student-centered learning: teaching activities are designed in accordance with students' needs to achieve learning objectives;
+- Evaluations that are integrated into the learning process;
+- Active Learning: lecture design includes participatory methods that encourage the learning ability of future professionals, shared among the following activities:
+  - Acquisition
+  - Investiation/research
+  - Practice/training
+  - Discussion
+  - Production
+  - Collaboration
+
+In addition, we tried to be careful about well-formulated learning objectives:  
+- concise and precise
+- quantifiable (by the student and for assessment)
+- focused on skills 
+with aligned evaluations which:
+- are part of the learning process;
+- and should only assess the learning objectives e.g. "don’t test the application of a skill if it has not been taught".
+
+Then, our main pedagogical objective is to "make students familiar with ROS and ready to develop with it".
+Our second objectives are:
+- develop an application based on a set of specifications 
+- confront the differences between simulation and a real robot
+- apply theoretical knowledge of robotics and exploit all competencies from past/actual teaching units: in Python, Signal/image processing, Automatic control.
 
 
 ## Practicals
