@@ -50,7 +50,7 @@ The evaluation is made of:
 
 ---
 
-To contact us: (add sorbonne-universite.fr to our email to reach us!)
+To contact us:
 - Sylvain Argentieri <sylvain.argentieri[@]sorbonne-universite.fr>
 - Fabien Vérité <fabien.verite[@]sorbonne-universite.fr>
 - Ludovic Saint Bauzel <ludovic.saint-bauzel[@]sorbonne-universite.fr>
