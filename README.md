@@ -51,9 +51,9 @@ The evaluation is made of:
 ---
 
 To contact us: (add sorbonne-universite.fr to our email to reach us!)
-- Sylvain Argentieri <sylvain.argentieri@>
-- Fabien Vérité <fabien.verite@>
-- Ludovic Saint Bauzel <ludovic.saint-bauzel@>
+- Sylvain Argentieri <sylvain.argentieri[@]sorbonne-universite.fr>
+- Fabien Vérité <fabien.verite[@]sorbonne-universite.fr>
+- Ludovic Saint Bauzel <ludovic.saint-bauzel[@]sorbonne-universite.fr>
 
 ---
 This work is licensed under a
