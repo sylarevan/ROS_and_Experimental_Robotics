@@ -1,5 +1,5 @@
 # LICENSE
-```markdown
+
 Shield: [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
 
 This work is licensed under a
@@ -10,7 +10,7 @@ This work is licensed under a
 [cc-by-nc]: http://creativecommons.org/licenses/by-nc/4.0/
 [cc-by-nc-image]: https://licensebuttons.net/l/by-nc/4.0/88x31.png
 [cc-by-nc-shield]: https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg
-```
+
 # ROS and Experimental Robotics
 
 This repository gathers (most of) the pedagogical ressources used during the Sorbonne Université teaching unit called "ROS and experimental robotics", which is mainly dedicated to [ROS](https://www.ros.org/) (a software framework for Robotics) and its use in a simulated or experimental context. 
